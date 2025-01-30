@@ -1,0 +1,25 @@
+body {
+    display: flex;
+    flex-direction:row;
+    font-style: Tahoma;
+    font-size: 40px;
+}
+.box{
+    position: static;
+    height: 130px;
+    width: 80px;
+    margin: 5px;
+    border-left: dotted 10px #D0D0FF;
+    padding: 10px;
+    background: #eeeff2;
+}
+.box:hover{
+    background: yellow;
+    color: goldenrod;
+    cursor: pointer;
+}
+#f{
+    position: fixed;
+    right: 0%;
+    bottom: 0%;
+}
