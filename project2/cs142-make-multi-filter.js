@@ -1,4 +1,4 @@
-'use script'
+'use strict'
 
 function cs142MakeMultiFilter(originalArray){
     let currentArray = originalArray;
