@@ -1,0 +1,15 @@
+img{
+    height: 100px;
+    width: 75px;
+}
+.header-container {
+    padding: 40px 10px;
+    max-width: 800px;
+    margin-left: auto;
+    margin-right: auto;
+    border-bottom: 5px dotted;
+    background-color: aliceblue;
+  }
+.inline{
+    font-style: oblique;
+}
