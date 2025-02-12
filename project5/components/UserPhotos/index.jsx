@@ -1,5 +1,6 @@
 import React from "react";
 import { List,ListItem, Typography, Divider, Grid, Paper } from "@mui/material";
+import fetchModel from "../../lib/fetchModelData";
 
 import "./styles.css";
 
@@ -10,12 +11,16 @@ class UserPhotos extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      user:window.cs142models.userModel(this.props.match.params.userId),
+      user:{},
     }
-    let newID = this.props.match.params.userId;
-    let newuser = window.cs142models.userModel(newID);
-    this.props.changeinfo("Photos of " + newuser.first_name 
-        + " " + newuser.last_name);
+    let response = fetchModel(`http://localhost:3000/user/${this.props.match.params.userId}`);
+    response.then((response)=>{
+      this.setState({user:response.data});
+      this.props.changeinfo("Photos of " + response.data.first_name 
+        + " " + response.data.last_name);
+    }).catch((response)=>{
+      console.log(response.status,response.statusText);
+    });
   }
 
   render() {

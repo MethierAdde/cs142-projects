@@ -1,6 +1,7 @@
 import React from "react";
 import { Divider, Grid, Typography } from "@mui/material";
 import { Link } from "react-router-dom";
+import fetchModel from "../../lib/fetchModelData";
 
 import "./styles.css";
 
@@ -11,21 +12,29 @@ class UserDetail extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      user:window.cs142models.userModel(this.props.match.params.userId),
+      user:{},
     }
-    let newID = this.props.match.params.userId;
-    let newuser = window.cs142models.userModel(newID);
-    this.props.changeinfo("Info of " + newuser.first_name 
-        + " " + newuser.last_name);
+    let response = fetchModel(`http://localhost:3000/user/${this.props.match.params.userId}`);
+    response.then((response)=>{
+      this.setState({user:response.data});
+      this.props.changeinfo("Photos of " + response.data.first_name 
+        + " " + response.data.last_name);
+    }).catch((response)=>{
+      console.log(response.status,response.statusText);
+    });
   }
   //负责更新页面的
   componentDidUpdate(){
     let newID = this.props.match.params.userId;
     if(newID !== this.state.user._id){
-      let newuser = window.cs142models.userModel(newID);
-      this.setState({user:newuser});
-      this.props.changeinfo("Info of " + newuser.first_name 
-        + " " + newuser.last_name);
+      let response = fetchModel(`http://localhost:3000/user/${newID}`);
+      response.then((response)=>{
+        this.setState({user:response.data});
+        this.props.changeinfo("Photos of " + response.data.first_name 
+          + " " + response.data.last_name);
+      }).catch((response)=>{
+        console.log(response.status,response.statusText);
+      });
     }
   }
 

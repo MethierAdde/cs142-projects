@@ -8,6 +8,7 @@ import {
   Typography,
 } from "@mui/material";
 import { HashRouter, Route, Switch, Link } from "react-router-dom";
+import fetchModel from "../../lib/fetchModelData";
 
 import "./styles.css";
 
@@ -18,8 +19,14 @@ class UserList extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      users:window.cs142models.userListModel(),
+      users:[],
     }
+    let response = fetchModel("http://localhost:3000/user/list");
+    response.then((response)=>{
+      this.setState({users:response.data});
+    }).catch((response)=>{
+      console.log(response.status,response.statusText);
+    });
   }
 
   render() {

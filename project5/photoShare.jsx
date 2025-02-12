@@ -15,7 +15,7 @@ class PhotoShare extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      info:"",
+      info:"Homepage",
     }
   }
   changeinfo = (newinfo)=>{
