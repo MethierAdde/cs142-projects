@@ -1,6 +1,7 @@
 import React from "react";
 import { List,ListItem, Typography, Divider, Grid, Paper } from "@mui/material";
 import fetchModel from "../../lib/fetchModelData";
+import axios from "axios";
 
 import "./styles.css";
 
@@ -12,21 +13,29 @@ class UserPhotos extends React.Component {
     super(props);
     this.state = {
       user:{},
+      photos:[],
     }
-    let response = fetchModel(`http://localhost:3000/user/${this.props.match.params.userId}`);
+    let response = axios.get(`http://localhost:3000/user/${this.props.match.params.userId}`);
     response.then((response)=>{
       this.setState({user:response.data});
       this.props.changeinfo("Photos of " + response.data.first_name 
         + " " + response.data.last_name);
+      let photosResponse = axios.get(`http://localhost:3000/photosOfUser/${this.state.user._id}`);
+      photosResponse.then((response1)=>{
+        this.setState({photos:response1.data});
+      }).catch((response1)=>{
+        console.log(response1.status,response1.statusText);
+      })
     }).catch((response)=>{
       console.log(response.status,response.statusText);
     });
+    
   }
 
   render() {
     return (
       <List>
-        {window.cs142models.photoOfUserModel(this.state.user._id)?.map((photo)=>{
+        {this.state.photos?.map((photo)=>{
           return <Grid key = {photo._id}>
             <Paper className="cs142-photo-item">
               <img src = {`../../images/${photo.file_name}`} />

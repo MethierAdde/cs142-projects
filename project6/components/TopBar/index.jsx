@@ -1,5 +1,6 @@
 import React, { version } from "react";
 import { AppBar, Grid, Toolbar, Typography } from "@mui/material";
+import axios from "axios";
 
 import "./styles.css";
 import fetchModel from "../../lib/fetchModelData";
@@ -14,7 +15,7 @@ class TopBar extends React.Component {
       info:this.props.info,
       version:"",
     }
-    let response = fetchModel("http://localhost:3000/test/info");
+    let response = axios.get("http://localhost:3000/test/info");
       response.then((response)=>{
         this.setState({version:response.data.__v});
       }).catch((response)=>{

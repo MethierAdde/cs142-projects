@@ -4,6 +4,7 @@ import { Link } from "react-router-dom";
 import fetchModel from "../../lib/fetchModelData";
 
 import "./styles.css";
+import axios from "axios";
 
 /**
  * Define UserDetail, a React component of CS142 Project 5.
@@ -14,7 +15,7 @@ class UserDetail extends React.Component {
     this.state = {
       user:{},
     }
-    let response = fetchModel(`http://localhost:3000/user/${this.props.match.params.userId}`);
+    let response = axios.get(`http://localhost:3000/user/${this.props.match.params.userId}`);
     response.then((response)=>{
       this.setState({user:response.data});
       this.props.changeinfo("Info of " + response.data.first_name 
@@ -27,7 +28,7 @@ class UserDetail extends React.Component {
   componentDidUpdate(){
     let newID = this.props.match.params.userId;
     if(newID !== this.state.user._id){
-      let response = fetchModel(`http://localhost:3000/user/${newID}`);
+      let response = axios.get(`http://localhost:3000/user/${newID}`);
       response.then((response)=>{
         this.setState({user:response.data});
         this.props.changeinfo("Info of " + response.data.first_name 

@@ -11,6 +11,7 @@ import { HashRouter, Route, Switch, Link } from "react-router-dom";
 import fetchModel from "../../lib/fetchModelData";
 
 import "./styles.css";
+import axios from "axios";
 
 /**
  * Define UserList, a React component of CS142 Project 5.
@@ -21,7 +22,7 @@ class UserList extends React.Component {
     this.state = {
       users:[],
     }
-    let response = fetchModel("http://localhost:3000/user/list");
+    let response = axios.get("http://localhost:3000/user/list");
     response.then((response)=>{
       this.setState({users:response.data});
     }).catch((response)=>{
