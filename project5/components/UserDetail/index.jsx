@@ -17,7 +17,7 @@ class UserDetail extends React.Component {
     let response = fetchModel(`http://localhost:3000/user/${this.props.match.params.userId}`);
     response.then((response)=>{
       this.setState({user:response.data});
-      this.props.changeinfo("Photos of " + response.data.first_name 
+      this.props.changeinfo("Info of " + response.data.first_name 
         + " " + response.data.last_name);
     }).catch((response)=>{
       console.log(response.status,response.statusText);
@@ -30,7 +30,7 @@ class UserDetail extends React.Component {
       let response = fetchModel(`http://localhost:3000/user/${newID}`);
       response.then((response)=>{
         this.setState({user:response.data});
-        this.props.changeinfo("Photos of " + response.data.first_name 
+        this.props.changeinfo("Info of " + response.data.first_name 
           + " " + response.data.last_name);
       }).catch((response)=>{
         console.log(response.status,response.statusText);
