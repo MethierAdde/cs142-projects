@@ -24,7 +24,7 @@ mongoose.connect("mongodb://127.0.0.1/cs142project6", {
 });
 
 // Get the magic models we used in the previous projects.
-const cs142models = require("../project5/modelData/photoApp.js").cs142models;
+const cs142models = require("./modelData/photoApp.js").cs142models;
 
 // Load the Mongoose schema for Use and Photo
 const User = require("./schema/user.js");

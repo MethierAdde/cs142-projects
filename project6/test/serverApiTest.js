@@ -11,7 +11,7 @@ const async = require("async");
 const _ = require("lodash");
 const fs = require("fs");
 
-const cs142models = require("../../project5/modelData/photoApp.js").cs142models;
+const cs142models = require("../modelData/photoApp.js").cs142models;
 
 const port = 3000;
 const host = "localhost";
